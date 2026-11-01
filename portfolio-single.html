@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rounak Kumar — CS Student</title>
+  <meta name="description" content="Rounak Kumar — first-year Computer Science student at Sarala Birla University, Ranchi. Learning C/C++, data structures, math, and logic.">
+
+  <!-- Favicon (Inlined SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230c0c0d'/><text x='16' y='22' text-anchor='middle' font-family='system-ui, sans-serif' font-weight='700' font-size='15' fill='%23c9a84c' letter-spacing='-0.5'>RK</text></svg>" type="image/svg+xml">
+
+  <!-- Fonts: Space Grotesk (headings) + JetBrains Mono (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+/* ============================================
+   Rounak Kumar — Portfolio Styles
+   ============================================ */
+
+:root {
+  /* Colors */
+  --bg:          #0c0c0d;
+  --bg-raised:   #131315;
+  --text:        #e2ded8;
+  --text-muted:  #8a8680;
+  --accent:      #c9a84c;
+  --border:      #2a2a2c;
+
+  /* Typography */
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body:    'JetBrains Mono', monospace;
+
+  /* Layout */
+  --sidebar-w:    72px;
+  --content-max:  720px;
+  --page-pad:     1.5rem;
+  --site-max:     960px;
+
+  /* Spacing scale */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  8rem;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--page-pad);
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  text-decoration: none;
+  z-index: 200;
+  border-radius: 0 0 4px 4px;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  position: relative;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+a:hover::after,
+a:focus-visible::after {
+  width: 100%;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+h2 {
+  font-size: 1.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+p {
+  max-width: 58ch;
+}
+
+/* Hero */
+.hero {
+  min-height: 70vh;
+  min-height: 70svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-lg) var(--page-pad) var(--space-xl);
+  max-width: var(--site-max);
+  margin: 0 auto;
+}
+
+.hero-name {
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-md);
+}
+
+.hero-rule {
+  width: 3.5rem;
+  height: 2px;
+  background: var(--accent);
+  border: none;
+  margin-bottom: var(--space-md);
+}
+
+.hero-description {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-sm);
+}
+
+.hero-status {
+  font-size: 0.9375rem;
+  color: var(--text);
+  margin-bottom: var(--space-lg);
+}
+
+.cursor {
+  color: var(--accent);
+  animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.8125rem;
+}
+
+.hero-links a {
+  color: var(--text-muted);
+  transition: color 0.15s ease;
+}
+
+.hero-links a:hover {
+  color: var(--accent);
+}
+
+.hero-sep {
+  color: var(--border);
+  user-select: none;
+}
+
+/* Site Grid */
+.site-grid {
+  max-width: var(--site-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+}
+
+/* Section Nav */
+.section-nav {
+  display: flex;
+  gap: var(--space-md);
+  padding: 0.875rem 0;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 50;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.section-nav a::after {
+  display: none;
+}
+
+.section-nav a:hover,
+.section-nav a.active {
+  color: var(--accent);
+}
+
+.nav-num {
+  font-weight: 500;
+}
+
+.nav-label {
+  display: none;
+}
+
+/* Sections */
+.section {
+  padding: var(--space-xl) 0 var(--space-lg);
+  border-top: 1px solid var(--border);
+}
+
+.section:first-of-type {
+  border-top: none;
+  padding-top: var(--space-lg);
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.section-number {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.section-intro {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: var(--space-lg);
+}
+
+/* 01 Now */
+.now-items {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.now-item {
+  padding-left: var(--space-md);
+  border-left: 1px solid var(--border);
+}
+
+.now-item h3 {
+  margin-bottom: var(--space-xs);
+  color: var(--text);
+}
+
+.now-item p {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* 02 Projects */
+.projects-list {
+  display: grid;
+  gap: 0;
+}
+
+.project-item {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0 var(--space-sm);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.project-item:first-child {
+  padding-top: 0;
+}
+
+.project-item:last-child {
+  border-bottom: none;
+}
+
+.project-number {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--accent);
+  padding-top: 0.2em;
+}
+
+.project-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.project-title {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.project-title.placeholder {
+  color: var(--text-muted);
+}
+
+.project-description {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs) var(--space-sm);
+  margin-top: 0.25rem;
+}
+
+.project-stack {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  padding: 0.125rem 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.project-learned {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.project-link a {
+  font-size: 0.8125rem;
+}
+
+/* 03 Skills */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.skill-group h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.skill-group li {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  padding: 0.2rem 0;
+}
+
+.skill-note {
+  color: var(--accent);
+  font-size: 0.75rem;
+}
+
+/* 04 Education */
+.education-list {
+  display: grid;
+  gap: 0;
+}
+
+.education-item {
+  padding: var(--space-md) 0 var(--space-md) var(--space-md);
+  border-left: 1px solid var(--border);
+  position: relative;
+}
+
+.education-item::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: calc(var(--space-md) + 0.35rem);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.education-item.current::before {
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent);
+}
+
+.education-item:first-child {
+  padding-top: 0;
+}
+
+.education-item:first-child::before {
+  top: 0.35rem;
+}
+
+.education-item:last-child {
+  border-left-color: transparent;
+}
+
+.education-degree {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.3;
+  margin-bottom: 0.125rem;
+}
+
+.education-school {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.education-status {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+/* 05 Contact */
+.contact-links {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.contact-link {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  font-size: 0.875rem;
+}
+
+.contact-label {
+  color: var(--text-muted);
+  min-width: 5rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+/* Footer */
+.site-footer {
+  max-width: var(--site-max);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--page-pad) var(--space-md);
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Scroll Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger > .reveal:nth-child(1) { transition-delay:   0ms; }
+.reveal-stagger > .reveal:nth-child(2) { transition-delay:  80ms; }
+.reveal-stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger > .reveal:nth-child(6) { transition-delay: 400ms; }
+
+/* Desktop (>= 900px) */
+@media (min-width: 900px) {
+  .hero {
+    min-height: 85vh;
+    min-height: 85svh;
+    padding-left: calc(var(--sidebar-w) + var(--page-pad) * 2);
+  }
+
+  .site-grid {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    gap: 0 var(--space-md);
+  }
+
+  .section-nav {
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 0;
+    position: sticky;
+    top: var(--space-md);
+    align-self: start;
+    border-bottom: none;
+    padding-top: var(--space-xl);
+    background: transparent;
+  }
+
+  .nav-label {
+    display: inline;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg) var(--space-xl);
+  }
+
+  .site-footer {
+    padding-left: calc(var(--sidebar-w) + var(--page-pad) * 2 + var(--space-md));
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --page-pad: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .cursor {
+    animation: none;
+    display: none;
+  }
+
+  a::after {
+    transition: none;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- Skip link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <h1 class="hero-name">Rounak<br>Kumar</h1>
+    <hr class="hero-rule" aria-hidden="true">
+    <p class="hero-description">
+      First-year CS student at Sarala Birla University, Ranchi.<br>
+      Learning to write software from the ground up &mdash;<br>
+      C/C++, data structures, math, logic.
+    </p>
+    <p class="hero-status">Nothing shipped yet. Working on it.<span class="cursor" aria-hidden="true">&#9612;</span></p>
+    <div class="hero-links">
+      <a href="mailto:rounakkumar0042@gmail.com">rounakkumar0042@gmail.com</a>
+      <span class="hero-sep" aria-hidden="true">/</span>
+      <!-- Replace # with your actual GitHub URL -->
+      <a href="#" aria-label="GitHub profile">github</a>
+      <span class="hero-sep" aria-hidden="true">/</span>
+      <!-- Replace # with your actual LinkedIn URL -->
+      <a href="#" aria-label="LinkedIn profile">linkedin</a>
+    </div>
+  </header>
+
+  <!-- ===== GRID: SIDE NAV + MAIN ===== -->
+  <div class="site-grid">
+
+    <!-- Section navigation -->
+    <nav class="section-nav" aria-label="Page sections">
+      <a href="#now" data-section="now"><span class="nav-num">01</span><span class="nav-label">Now</span></a>
+      <a href="#projects" data-section="projects"><span class="nav-num">02</span><span class="nav-label">Projects</span></a>
+      <a href="#skills" data-section="skills"><span class="nav-num">03</span><span class="nav-label">Skills</span></a>
+      <a href="#education" data-section="education"><span class="nav-num">04</span><span class="nav-label">Education</span></a>
+      <a href="#contact" data-section="contact"><span class="nav-num">05</span><span class="nav-label">Contact</span></a>
+    </nav>
+
+    <main id="main-content">
+
+      <!-- ===== 01 NOW ===== -->
+      <section id="now" class="section">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">01</span>
+          <h2>Now</h2>
+        </div>
+        <p class="section-intro">This semester I'm working through the basics. No shortcuts.</p>
+        <div class="section-content now-items reveal-stagger">
+          <div class="now-item reveal">
+            <h3>C/C++ fundamentals</h3>
+            <p>Pointers, memory management, how things actually work under the hood. Writing code that talks to the machine, not just to an abstraction.</p>
+          </div>
+          <div class="now-item reveal">
+            <h3>Data structures</h3>
+            <p>Arrays, linked lists, stacks, queues. Building each one from scratch to understand what's happening inside.</p>
+          </div>
+          <div class="now-item reveal">
+            <h3>Problem solving</h3>
+            <p>Working through problems regularly. Getting comfortable with thinking before coding &mdash; breaking things down, finding patterns, reasoning through edge cases.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 02 PROJECTS ===== -->
+      <section id="projects" class="section">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">02</span>
+          <h2>Projects</h2>
+        </div>
+        <p class="section-intro">Nothing here yet. These slots are waiting for real work.</p>
+        <div class="section-content">
+          <div id="projects-list" class="projects-list reveal-stagger">
+            <!-- Rendered via JavaScript below -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 03 SKILLS ===== -->
+      <section id="skills" class="section">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">03</span>
+          <h2>Skills</h2>
+        </div>
+        <p class="section-intro">Honest inventory. No inflated ratings.</p>
+        <div class="section-content">
+          <div class="skills-grid reveal-stagger">
+            <div class="skill-group reveal">
+              <h3>Programming</h3>
+              <ul>
+                <li>C / C++ <span class="skill-note">(learning)</span></li>
+              </ul>
+            </div>
+            <div class="skill-group reveal">
+              <h3>Thinking</h3>
+              <ul>
+                <li>Mathematics foundation</li>
+                <li>Problem solving</li>
+                <li>Logical reasoning</li>
+              </ul>
+            </div>
+            <div class="skill-group reveal">
+              <h3>Tools</h3>
+              <ul>
+                <li>AI tools (e.g., Claude) for research and productivity</li>
+              </ul>
+            </div>
+            <div class="skill-group reveal">
+              <h3>Working style</h3>
+              <ul>
+                <li>Communication</li>
+                <li>Teamwork</li>
+                <li>Time management</li>
+                <li>Quick learner</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 04 EDUCATION ===== -->
+      <section id="education" class="section">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">04</span>
+          <h2>Education</h2>
+        </div>
+        <div class="section-content">
+          <div class="education-list reveal-stagger">
+            <div class="education-item current reveal">
+              <div class="education-degree">B.Tech in Computer Science Engineering</div>
+              <div class="education-school">Sarala Birla University, Ranchi</div>
+              <div class="education-status">1st year &mdash; current</div>
+            </div>
+            <div class="education-item reveal">
+              <div class="education-degree">10+2</div>
+              <div class="education-school">Gyansthali</div>
+            </div>
+            <div class="education-item reveal">
+              <div class="education-degree">10th</div>
+              <div class="education-school">D.A.V Medical, Gaya, Bihar</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 05 CONTACT ===== -->
+      <section id="contact" class="section">
+        <div class="section-header">
+          <span class="section-number" aria-hidden="true">05</span>
+          <h2>Contact</h2>
+        </div>
+        <div class="section-content">
+          <div class="contact-links reveal-stagger">
+            <div class="contact-link reveal">
+              <span class="contact-label">Email</span>
+              <a href="mailto:rounakkumar0042@gmail.com">rounakkumar0042@gmail.com</a>
+            </div>
+            <div class="contact-link reveal">
+              <span class="contact-label">GitHub</span>
+              <!-- Replace # with your actual link -->
+              <a href="#">[GITHUB URL]</a>
+            </div>
+            <div class="contact-link reveal">
+              <span class="contact-label">LinkedIn</span>
+              <!-- Replace # with your actual link -->
+              <a href="#">[LINKEDIN URL]</a>
+            </div>
+            <div class="contact-link reveal">
+              <span class="contact-label">Resume</span>
+              <!-- Replace with path or link to your resume PDF -->
+              <a href="assets/resume.pdf" download>Download PDF</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Rounak Kumar &middot; Built from scratch</p>
+  </footer>
+
+  <!-- ===== INLINED JAVASCRIPT & PROJECT DATA ===== -->
+  <script>
+    /* Edit projects directly in this array: */
+    var PROJECTS = [
+      {
+        title: "[Project Title]",
+        description: "What it does — replace this with a one-sentence description.",
+        stack: "C / C++",
+        learned: "What you figured out building this — replace with your own words.",
+        link: "#",
+        placeholder: true
+      },
+      {
+        title: "[Project Title]",
+        description: "What it does — replace this with a one-sentence description.",
+        stack: "C / C++",
+        learned: "What you figured out building this — replace with your own words.",
+        link: "#",
+        placeholder: true
+      },
+      {
+        title: "[Project Title]",
+        description: "What it does — replace this with a one-sentence description.",
+        stack: "C / C++",
+        learned: "What you figured out building this — replace with your own words.",
+        link: "#",
+        placeholder: true
+      }
+    ];
+
+    (function () {
+      'use strict';
+
+      var prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
+      /* 1. Render projects */
+      function renderProjects() {
+        var container = document.getElementById('projects-list');
+        if (!container || typeof PROJECTS === 'undefined') return;
+
+        PROJECTS.forEach(function (project, i) {
+          var num = String(i + 1).padStart(2, '0');
+          var item = document.createElement('div');
+          item.className = 'project-item reveal';
+
+          var titleClass = project.placeholder
+            ? 'project-title placeholder'
+            : 'project-title';
+
+          var linkMarkup = '';
+          if (project.link && project.link !== '#' && !project.placeholder) {
+            linkMarkup =
+              '<div class="project-link"><a href="' +
+              escapeHtml(project.link) +
+              '">View project &rarr;</a></div>';
+          }
+
+          item.innerHTML =
+            '<span class="project-number">' + num + '</span>' +
+            '<div class="project-info">' +
+              '<div class="' + titleClass + '">' + escapeHtml(project.title) + '</div>' +
+              '<p class="project-description">' + escapeHtml(project.description) + '</p>' +
+              '<div class="project-meta">' +
+                '<span class="project-stack">' + escapeHtml(project.stack) + '</span>' +
+              '</div>' +
+              '<p class="project-learned">' + escapeHtml(project.learned) + '</p>' +
+              linkMarkup +
+            '</div>';
+
+          container.appendChild(item);
+        });
+      }
+
+      function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+      }
+
+      /* 2. Hero animation */
+      function initHeroAnimation() {
+        if (prefersReducedMotion) return;
+        var hero = document.querySelector('.hero');
+        if (!hero) return;
+
+        var children = hero.children;
+        for (var i = 0; i < children.length; i++) {
+          (function (el, delay) {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(16px)';
+            requestAnimationFrame(function () {
+              requestAnimationFrame(function () {
+                el.style.transition =
+                  'opacity 0.5s ease ' + delay + 'ms, ' +
+                  'transform 0.5s ease ' + delay + 'ms';
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+              });
+            });
+          })(children[i], i * 100);
+        }
+      }
+
+      /* 3. Cursor blink */
+      function initCursor() {
+        var cursor = document.querySelector('.cursor');
+        if (!cursor) return;
+        if (prefersReducedMotion) {
+          cursor.remove();
+          return;
+        }
+        setTimeout(function () {
+          cursor.style.transition = 'opacity 0.3s ease';
+          cursor.style.opacity = '0';
+          setTimeout(function () {
+            cursor.remove();
+          }, 350);
+        }, 3000);
+      }
+
+      /* 4. Scroll reveal */
+      function initScrollReveal() {
+        var reveals = document.querySelectorAll('.reveal');
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+          for (var j = 0; j < reveals.length; j++) {
+            reveals[j].classList.add('revealed');
+          }
+          return;
+        }
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        for (var k = 0; k < reveals.length; k++) {
+          observer.observe(reveals[k]);
+        }
+      }
+
+      /* 5. Nav tracking */
+      function initNavTracking() {
+        var navLinks = document.querySelectorAll('.section-nav a');
+        var sections = document.querySelectorAll('main .section');
+        if (!navLinks.length || !sections.length || !('IntersectionObserver' in window)) return;
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                var id = entry.target.id;
+                for (var i = 0; i < navLinks.length; i++) {
+                  var isActive = navLinks[i].getAttribute('data-section') === id;
+                  navLinks[i].classList.toggle('active', isActive);
+                  if (isActive) {
+                    navLinks[i].setAttribute('aria-current', 'true');
+                  } else {
+                    navLinks[i].removeAttribute('aria-current');
+                  }
+                }
+              }
+            });
+          },
+          { rootMargin: '-20% 0px -60% 0px' }
+        );
+
+        for (var i = 0; i < sections.length; i++) {
+          observer.observe(sections[i]);
+        }
+      }
+
+      /* 6. Smooth scroll */
+      function initSmoothScroll() {
+        var navLinks = document.querySelectorAll('.section-nav a');
+        for (var i = 0; i < navLinks.length; i++) {
+          navLinks[i].addEventListener('click', function (e) {
+            var href = this.getAttribute('href');
+            if (!href || href.charAt(0) !== '#') return;
+            var target = document.querySelector(href);
+            if (!target) return;
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            target.setAttribute('tabindex', '-1');
+            target.focus({ preventScroll: true });
+          });
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        renderProjects();
+        initHeroAnimation();
+        initCursor();
+        initScrollReveal();
+        initNavTracking();
+        initSmoothScroll();
+      });
+    })();
+  </script>
+</body>
+</html>
